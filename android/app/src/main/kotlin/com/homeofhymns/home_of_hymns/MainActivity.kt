@@ -1,0 +1,5 @@
+package com.homeofhymns.home_of_hymns
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity : FlutterActivity()
