@@ -198,7 +198,9 @@ class AppState extends ChangeNotifier {
   HymnText activeHymnText(Hymn h) {
     if (useYo(h)) return yoFor(h)!;
     if (hymnLang != 'orig') {
-      final t = data.en[hymnLang]?[h.id.toString()] ?? (hymnLang == 'yo' ? data.yo[h.id.toString()] : null);
+      final id = h.id.toString();
+      // yo/en maps are keyed by hymn id (mirrors TRANSLATIONS.en[h.id] in renderer.js)
+      final t = hymnLang == 'yo' ? data.yo[id] : (hymnLang == 'en' ? data.en[id] : null);
       if (t != null) {
         return HymnText(
           title: (t['title'] as String?) ?? h.title,

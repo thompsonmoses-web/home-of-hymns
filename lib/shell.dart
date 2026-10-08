@@ -174,28 +174,31 @@ class _ShellState extends State<Shell> {
   ];
 
   Widget _body() {
-    if (app.hymnOpen != null) return const PlayerScreen();
+    // Screens are intentionally non-const: const widgets are canonicalized to a
+    // single instance, so Flutter's updateChild skips them on notify() and the
+    // subtree would never rebuild (e.g. text size changes would not apply).
+    if (app.hymnOpen != null) return PlayerScreen();
     switch (app.view) {
       case 'home':
-        return const HomeScreen();
+        return HomeScreen();
       case 'hymns':
-        return const HymnsScreen();
+        return HymnsScreen();
       case 'collections':
-        return const CollectionsScreen();
+        return CollectionsScreen();
       case 'collection':
-        return const CollectionScreen();
+        return CollectionScreen();
       case 'library':
       case 'favorites':
       case 'history':
-        return const LibraryScreen();
+        return LibraryScreen();
       case 'more':
-        return const MoreScreen();
+        return MoreScreen();
       case 'settings':
-        return const SettingsScreen();
+        return SettingsScreen();
       case 'about':
-        return const AboutScreen();
+        return AboutScreen();
       default:
-        return const HomeScreen();
+        return HomeScreen();
     }
   }
 
